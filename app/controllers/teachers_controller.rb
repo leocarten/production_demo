@@ -37,6 +37,8 @@ class TeachersController < ApplicationController
         @question = Question.new
         @questions = Question.all
         @answers = Answer.all
+        @studnets = Student.all
+        @questionCount = Question.all.length
     end
 
     #Never used buy made to create a teacher login

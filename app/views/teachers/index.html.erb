@@ -35,17 +35,27 @@
   <h6 class="ms-1">No data found in the table</h6>
 <% end %>
 
-<h2 class="ms-1 mt-4">People who have taken your exam:</h2>
-<% if !@answers.blank? %>
-  <% @answers.each do |answer| %>
-    <h6 class="ms-1">Student: <%= answer.student.username %> | Question: <%= answer.question.QuestionText %> | Response: <%= answer.response %> </h6>
-    
-  <% end %>
-<% else %>
-  <h6 class="ms-1">No answers found.</h6>
-<% end %>
 <div class="mt-4">
 <div class="mb-4">
+
+</div>
+</div>
+<h1>STUDENT GRADES</h1>
+<% if !@studnets.blank? %>
+  <% @studnets.each do |student| %>
+    <% total = Float(0) %>
+    <% if !@answers.blank? %>
+      <% @answers.each do |answer| %>
+        <% if answer.student.id == student.id%>
+          <% if answer.question.QuestionAnswer == answer.response%>
+              <% total += 1%>
+          <% end %>
+        <% end %>
+      <% end %>
+      <h6> <%= student.username %>'s Grade: <%= ((total / @questionCount)*100).round(2) %>%</h6>
+    <% end %>
+  <% end %>
+<% end %>
+
+
 <%= link_to 'Log Out', teacher_login_url,  class: "btn btn-danger"%>
-</div>
-</div>
